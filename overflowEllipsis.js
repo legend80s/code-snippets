@@ -1,3 +1,5 @@
+// angular ui bootstrap directive 
+// show tooltip / popover only when the text is overflow
 .directive('popoverTrigger', ['$timeout', function(timeout) {
     return {
       restrict: 'A',
@@ -11,7 +13,7 @@
           if(promise) {
             timeout.cancel(promise);
           }
-          // 保证非popover-trigger="overflowEllipsis"仍然正常工作
+          // make popover-trigger !="overflowEllipsis" work as well
           element.trigger('mouseenterDelay');
         });
         element.on('mouseleave', function() {
