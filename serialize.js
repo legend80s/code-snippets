@@ -24,11 +24,15 @@ function serialize(tasks) {
 // example
 const tasks = chunk(appIds, concurrency).map((chunkOfIds) =>
   () => this.q.all(chunkOfIds.map((appId) =>
-    this.App.get({ appName: appId, handleError: false }).$promise
+    this.App.get({ appName: rnd(appId), handleError: false }).$promise
       // 先到先展现
       .then(({ id, quota, quotaReviewingTask, statistics }) => {
         this.otherInformationList[id] = { quota, quotaReviewingTask, statistics };
-      })))
+      })
+      // 出错不影响后面的应用继续获取详情
+      .catch(() => {})
+    )
+  )
 );
 
-return serialize(tasks);
+serialize(tasks);
