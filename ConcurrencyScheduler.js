@@ -9,7 +9,10 @@ import chunk from 'lodash/array/chunk';
  * @example
  * const userIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * const concurrency = 3;
- * const fetcher = (userId) => window.fetch(`http://jsonplaceholder.typicode.com/users/${userId}`).then((response) => response.json());
+ * const fetcher = (userId) => window.fetch(`http://jsonplaceholder.typicode.com/users/${userId}`)
+ *   .then((response) => response.json())
+ *   .catch(() => {});
+ *
  * const cs = new ConcurrencyScheduler(userIds, fetcher, concurrency);
  *
  * cs.start().then(console.log);
