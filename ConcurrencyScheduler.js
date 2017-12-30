@@ -15,9 +15,9 @@ import chunk from 'lodash/array/chunk';
  *   .then((response) => response.json())
  *   .catch(() => {});
  *
- * const cs = new ResourceConcurrencyScheduler(userIds, fetchUser, concurrency);
+ * const rcs = new ResourceConcurrencyScheduler(userIds, fetchUser, concurrency);
  *
- * cs.start().then(console.log);
+ * rcs.start().then(console.log);
  */
 class ResourceConcurrencyScheduler {
   /**
