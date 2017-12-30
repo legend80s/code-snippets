@@ -2,6 +2,8 @@ import serialize from './serialize';
 import chunk from 'lodash/array/chunk';
 
 /**
+ * Async resources concurrency scheduler
+ *
  * 资源并发请求调度器
  *
  * @author 孟陬
@@ -9,29 +11,21 @@ import chunk from 'lodash/array/chunk';
  * @example
  * const userIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * const concurrency = 3;
- * const fetcher = (userId) => window.fetch(`http://jsonplaceholder.typicode.com/users/${userId}`)
+ * const fetchUser = (id) => window.fetch(`http://jsonplaceholder.typicode.com/users/${id}`)
  *   .then((response) => response.json())
  *   .catch(() => {});
  *
- * const cs = new ConcurrencyScheduler(userIds, fetcher, concurrency);
+ * const cs = new ResourceConcurrencyScheduler(userIds, fetchUser, concurrency);
  *
  * cs.start().then(console.log);
  */
-class ConcurrencyScheduler {
-  /**
-   * 返回 Promise 的函数
-   *
-   * @callback fetchCallback
-   * @param {string} id 资源 id
-   * @return {Promise}
-   */
-
+class ResourceConcurrencyScheduler {
   /**
    * @constructor
    *
-   * @param  {Array}  [resourceIds=[]] 资源 ID 集合
-   * @param  {fetchCallback} [resourceFetcher=() => Promise.resolve()] 获取资源函数
-   * @param  {integer} [concurrency=5] 并发度
+   * @param  {string[]}  [resourceIds=[]] 资源 ID 集合
+   * @param  {fetchResource} [resourceFetcher=() => Promise.resolve()] 获取资源函数
+   * @param  {number} [concurrency=5] 并发度
    */
   constructor(resourceIds = [], resourceFetcher = () => Promise.resolve(), concurrency = 5) {
     this.resourceIds = resourceIds;
@@ -40,11 +34,19 @@ class ConcurrencyScheduler {
   }
 
   /**
+   * 开始获取
+   *
+   * @return {Promise}
+   */
+  fetch() {
+    return serialize(this.makeTasks()).then(ResourceConcurrencyScheduler.flatten);
+  }
+
+  /**
    * 生成并发任务
    *
    * @private
-   *
-   * @return {Function[]} 返回 Promise 函数的数组
+   * @return {fetchResource[]} 返回 Promise 函数的数组
    */
   makeTasks() {
     return chunk(this.resourceIds, this.concurrency).map((chunkOfIds) =>
@@ -56,12 +58,15 @@ class ConcurrencyScheduler {
   }
 
   /**
-   * 开始获取
-   * @return {Promise}
+   * 浅展平数组
+   *
+   * @private
+   * @param  {Array} array 待展平的数组
+   * @return {Array}       已展平的数组
    */
-  start() {
-    return serialize(this.makeTasks());
+  static flatten(array) {
+    return array.reduce((cur, next) => cur.concat(next));
   }
 }
 
-module.exports = ConcurrencyScheduler;
+module.exports = ResourceConcurrencyScheduler;
