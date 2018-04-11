@@ -1,0 +1,5 @@
+# 获取本机 IP
+ipconfig getifaddr en0
+
+# 看 8080 端口被谁占用了
+lsof -i tcp:8080
