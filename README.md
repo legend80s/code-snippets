@@ -1,2 +1,2 @@
 # code-snippets
-Overused, Useful and Valuable Code Snippets
+Overused and valuable code snippets
