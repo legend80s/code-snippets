@@ -1,4 +1,5 @@
 // same origin
+// from https://css-tricks.com/examples/iFrameResize/
 $(function() {
   var iFrames = $('iframe');
 
