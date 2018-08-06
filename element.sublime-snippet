@@ -1,0 +1,41 @@
+<snippet>
+  <content><![CDATA[
+import angular from 'angular';
+import template from './index.html';
+import './index.less';
+
+import $3Controller from './$3Controller';
+
+class $3 {
+  constructor() {
+    this.restrict = 'E';
+    this.template = template;
+    this.scope = {
+      /**
+       * $5
+       * @type {$6}
+       */
+      $4: '=',
+    };
+
+    this.controller = $3Controller;
+    this.controllerAs = '$2Ctrl';
+    this.bindToController = true;
+  }
+
+  static directiveFactory() {
+    return new $3();
+  }
+}
+
+export default angular
+  .module('${1:osCamelCase}', [])
+  .directive('${1:osCamelCase}', $3.directiveFactory)
+  .name;
+
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>directive</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope>source.js</scope>
+</snippet>
