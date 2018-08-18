@@ -1,0 +1,30 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "jasmine": true
+  },
+  "rules": {
+    "global-require": "off",
+    "no-console": 1,
+    "newline-before-return": "error",
+    "no-use-before-define": ["error", { "functions": false }],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-var": "warn",
+    "no-unused-expressions": "error",
+    "max-depth": [2, 5],
+    "max-len": ["warn", 130, 4, {"ignoreComments": true}],
+    "max-nested-callbacks": [2, 3],
+    "max-params": ["warn", 5],
+    "max-statements": [2, 50],
+    "complexity": [2, 10],
+    "prefer-template": "warn",
+    "no-underscore-dangle": "warn",
+    "import/no-unresolved": "off",
+    "no-nested-ternary": "off",
+    "comma-dangle": "warn"
+  },
+  "globals": {
+    "__ASSET_PATH__": true,
+    "__WEBPACK_ENV__": true
+  }
+}
