@@ -3,3 +3,9 @@ ipconfig getifaddr en0
 
 # 看 8080 端口被谁占用了
 lsof -i tcp:8080
+
+# 查看磁盘占用率
+df -h
+
+# 查看某个文件夹占用率
+du -sh
