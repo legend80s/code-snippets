@@ -1,3 +1,4 @@
+// https://medium.com/dailyjs/typescript-create-a-condition-based-subset-types-9d902cea5b8c
 interface Person {
     id: number;
     name: string;    
