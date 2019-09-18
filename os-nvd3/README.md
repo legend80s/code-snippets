@@ -1,6 +1,6 @@
 # os-nvd3 组件
 
-## 开发原因
+## Why
 1. 修复 angular-nvd3 bug：弹窗显示图表不全
 2. 修复 angular-nvd3 bug：弹窗显示图表，弹窗消失后 tooltip 仍然遗留
 
@@ -11,8 +11,5 @@
 参见 [sine-cosine linechart](http://plnkr.co/edit/lBKFld?p=preview)
 
 ```html
-<os-nvd3
-  options="experimentsSingleMetricsChartCtrl.options"
-  data="experimentsSingleMetricsChartCtrl.data"
-></os-nvd3>
+<os-nvd3 options="experimentsSingleMetricsChartCtrl.options" data="experimentsSingleMetricsChartCtrl.data"></os-nvd3>
 ```
