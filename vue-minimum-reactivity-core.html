@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Minimum Reactivity Core</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    body {
+      margin: 3% 20%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    span {
+      margin-right: 1rem;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    Age: <span id="age"></span>
+    <button id="incrementer" type="button" class="btn btn-outline-primary">increment</button>
+  </p>
+
+  <p>
+    Name: <span id="name"></span>
+    <input id="name-input" />
+  </p>
+
+  <script>
+    function observe(obj) {
+      // Implement this!
+
+      Object.keys(obj).forEach((key) => {
+        let internalValue = obj[key];
+        const dep = new Dep();
+
+        Object.defineProperty(obj, key, {
+          get() {
+            // console.log(`${key} is ${internalValue}`)
+
+            dep.depend();
+
+            return internalValue;
+          },
+
+          set(newValue) {
+            internalValue = newValue;
+
+            dep.notify()
+          }
+        })
+      })
+    }
+
+    let activeUpdate = null;
+
+    function autorun(update) {
+      // Implement this!
+
+      activeUpdate = update;
+
+      update();
+
+      activeUpdate = null;
+    }
+
+    window.Dep = class Dep {
+      // Implement this!
+      constructor() {
+        this.subscribers = new Set();
+      }
+
+      depend() {
+        if (activeUpdate) {
+          this.subscribers.add(activeUpdate);
+        }
+      }
+
+      notify() {
+        this.subscribers.forEach(sub => sub());
+      }
+    }  
+  </script>
+
+  <script>
+    const state = {
+      age: 22,
+      name: 'legend80s',
+    }
+
+    observe(state)
+    
+    const updateAge = (age) => {
+      document.getElementById('age').textContent = state.age;
+      console.log('age updated');
+    }
+
+    const updateName = (name) => {
+      document.getElementById('name').textContent = state.name;
+      console.log('name updated');
+    }
+
+    autorun(updateAge)
+    autorun(updateAge)
+
+    // set default value for input
+    document.getElementById('name-input').value = state.name;
+
+    autorun(updateName)
+
+    // change age state and the template is expected to be changed
+    document.getElementById('incrementer').addEventListener('click', () => {
+      state.age += 1;
+    })
+
+    // change name state and the template is expected to be changed
+    document.getElementById('name-input').addEventListener('input', (event) => {
+      state.name = event.target.value;
+    })
+  </script>
+</body>
+</html>
