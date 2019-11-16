@@ -13,11 +13,9 @@ const token = new window.URLSearchParams(document.location.search).get('token')
 
 ### Vue Minimum Reactivity Core
 
-Code extracted from [vue-advanced-workshop](https://github.com/legend80s/vue-advanced-workshop/tree/master/1-reactivity).
+Code extracted from [vue-advanced-workshop](https://github.com/legend80s/vue-advanced-workshop/tree/master/1-reactivity). And Bilibili Video: https://www.bilibili.com/video/av49047971?p=1.
 
-And Bilibili Video: https://www.bilibili.com/video/av49047971?p=1
-
-Core functions: observe autorun Dep
+Part 1: Minimum reactivity core functions.
 
 ```js
 function observe(obj) {
@@ -69,7 +67,8 @@ window.Dep = class Dep {
   }
 }
 ```
-Use
+
+Part 1: Use and validate the minimum reactivity core functions.
 
 ```js
 const state = {
