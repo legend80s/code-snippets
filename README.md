@@ -109,5 +109,5 @@ document.getElementById('name-input').addEventListener('input', (event) => {
 })
 ```
 
-See complete code: https://github.com/legend80s/code-snippets/blob/master/vue-minimum-reactivity-core.html.
+See complete code: https://github.com/legend80s/code-snippets/blob/master/vue-minimum-reactivity-core.html or [codepen](https://codepen.io/chuanzonglcz/pen/dyyQKNp).
 
