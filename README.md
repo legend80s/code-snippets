@@ -90,7 +90,7 @@ const updateName = (name) => {
 
 autorun(updateAge)
 
-// Reason for why `this.subscribers = new Set();`?
+// reason for why `this.subscribers = new Set();`
 autorun(updateAge)
 
 // set default value for input
