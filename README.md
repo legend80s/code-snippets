@@ -15,7 +15,7 @@ const token = new window.URLSearchParams(document.location.search).get('token')
 
 Code extracted from [vue-advanced-workshop](https://github.com/legend80s/vue-advanced-workshop/tree/master/1-reactivity). And Bilibili Video: https://www.bilibili.com/video/av49047971?p=1.
 
-Part 1: Minimum reactivity core functions.
+Part 1: Minimum reactivity core functions: `observe`, `autorun` and `Dep` class.
 
 ```js
 function observe(obj) {
