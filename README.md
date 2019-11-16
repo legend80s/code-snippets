@@ -108,3 +108,6 @@ document.getElementById('name-input').addEventListener('input', (event) => {
   state.name = event.target.value;
 })
 ```
+
+See complete code: https://github.com/legend80s/code-snippets/blob/master/vue-minimum-reactivity-core.html.
+
