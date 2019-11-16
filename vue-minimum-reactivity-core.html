@@ -80,7 +80,7 @@
       notify() {
         this.subscribers.forEach(sub => sub());
       }
-    }  
+    }
   </script>
 
   <script>
@@ -90,7 +90,7 @@
     }
 
     observe(state)
-    
+
     const updateAge = (age) => {
       document.getElementById('age').textContent = state.age;
       console.log('age updated');
@@ -102,6 +102,8 @@
     }
 
     autorun(updateAge)
+
+    // reason for why `this.subscribers = new Set();`
     autorun(updateAge)
 
     // set default value for input
