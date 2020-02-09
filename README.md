@@ -1,6 +1,30 @@
 # code-snippets
 Overused and valuable code snippets
 
+## General
+
+1. async 版本的 some find。https://segmentfault.com/a/1190000014598785#item-6
+
+```typescript
+async function asyncSome<T>(array: T[], callback: (item: T, idx: number, arr: T[]) => Promise<boolean>) {
+  for (let [index, item] of Object.entries(array)) {
+    if (await callback(item, Number(index), array)) return true;
+  }
+
+  return false;
+}
+
+async function asyncFind<T>(array: T[], callback: (item: T, idx: number, arr: T[]) => Promise<boolean>) {
+  for (let [index, item] of Object.entries(array)) {
+    if (await callback(item, Number(index), array)) return item;
+  }
+
+  return null;
+}
+```
+
+## Browser
+
 ## URL
 
 ### Parse URL query string to object 
