@@ -5,6 +5,21 @@ Overused and valuable code snippets
 
 1. replace `1.1.5-alpha.0` to `1.1.5` in a file
 
+Use case: Copy and normalize version in package.json to crx's manifest.json.
+
+package.json
+
+```json
+{
+  "version": "1.1.6-alpha.1"
+  "scripts": {
+    "sync-version": "sh scripts/sync-version.sh"
+  }
+}
+```
+
+scripts/sync-version.sh
+
 ```sh
 # 1.1.5-alpha.0 => 1.1.5
 IFS='-' read -ra version_parts <<< "$npm_package_version"
