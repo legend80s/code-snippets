@@ -1,9 +1,26 @@
 # code-snippets
 Overused and valuable code snippets
 
-## General
+## Shell
 
-1. async 版本的 some find。https://segmentfault.com/a/1190000014598785#item-6
+1. replace `1.1.5-alpha.0` to `1.1.5` in a file
+
+```sh
+# 1.1.5-alpha.0 => 1.1.5
+IFS='-' read -ra version_parts <<< "$npm_package_version"
+
+npm_package_version_trimed=${version_parts[0]}
+
+sed -i '' -e 's|"version": "[^"]\{1,\}"|"version": "'$npm_package_version_trimed'"|' src/public/manifest.json
+
+echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has synced to manifest.json.\x1b[0m'
+```
+
+## JS
+
+### General
+
+1. async some and find。https://segmentfault.com/a/1190000014598785#item-6
 
 ```typescript
 async function asyncSome<T>(array: T[], callback: (item: T, idx: number, arr: T[]) => Promise<boolean>) {
