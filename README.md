@@ -64,6 +64,47 @@ async function asyncFind<T>(array: T[], callback: (item: T, idx: number, arr: T[
 ```js
 const token = new window.URLSearchParams(document.location.search).get('token')
 ```
+from https://gist.github.com/pirate/9298155edda679510723.
+
+> I've tested all the functions above by https://runkit.com/embed/n18yhf9u2nqc and the conclusion is that url-parse and URLSearchParams is the rightest and most expected ones against the url - Node.js built-in module. Even the query-string module is not work as expected.
+
+```js
+const search = '?abc=foo&def=[asf]&xyz==5&flag&&double&q=test1=test2&keyB=hff92hfgg=';
+
+console.log((search));
+
+const url = require('url')
+console.log('0. url - the Node.js built-in module');
+console.log(url.parse(search, true).query);
+
+console.log('1. queryString');
+console.log(queryString.parse(search));
+
+const parse = require('url-parse')
+console.log('2. url-parse');
+console.log(parse(search, true).query);
+
+console.log('3. URLSearchParams');
+console.log([...new URLSearchParams(search).entries()].reduce((q, [k, v]) => Object.assign(q, {[k]: v}), {}))
+```
+
+result
+
+```
+?abc=foo&def=[asf]&xyz==5&flag&&double&q=test1=test2&keyB=hff92hfgg=
+
+0. url - the Node.js built-in module
+Object {abc: "foo", def: "[asf]", double: "", flag: "", keyB: "hff92hfgg=", q: "test1=test2", xyz: "=5"}
+
+1. queryString
+Object {: null, abc: "foo", def: "[asf]", double: null, flag: null, keyB: "hff92hfgg=", q: "test1=test2", xyz: "=5"}
+
+2. url-parse
+Object {abc: "foo", def: "[asf]", double: "", flag: "", keyB: "hff92hfgg=", q: "test1=test2", xyz: "=5"}
+
+3. URLSearchParams
+Object {abc: "foo", def: "[asf]", double: "", flag: "", keyB: "hff92hfgg=", q: "test1=test2", xyz: "=5"}
+```
 
 ## Vue
 
