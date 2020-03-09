@@ -1,4 +1,5 @@
-# code-snippets
+# Code Snippets
+
 Overused and valuable code snippets
 
 ## Shell
