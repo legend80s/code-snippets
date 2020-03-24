@@ -383,4 +383,21 @@ See complete code: https://github.com/legend80s/code-snippets/blob/master/vue-mi
 }
 ```
 
+### TS
+
+the same signature only return type
+
+```ts
+interface IRequestPipeParams {
+  url: string;
+  headers: { [key: string]: any };
+  method: string;
+  data: { [key: string]: any };
+}
+
+export type IRequestPipe = (config: IRequestPipeParams) => Promise<any>;
+export type IRequestPipeSync = (...args: Parameters<IRequestPipe>) => any;
+
+```
+
 
