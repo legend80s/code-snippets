@@ -58,9 +58,34 @@ async function asyncFind<T>(array: T[], callback: (item: T, idx: number, arr: T[
 
 ## Browser
 
-## URL
+### Request
 
-### Parse URL query string to object 
+fetch synchronously
+
+```js
+console.log(1)
+
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://jsonplaceholder.typicode.com/todos/1", false);
+xhr.onload = function (e) {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+    } else {
+      console.error('status not 200:', xhr.status);
+    }
+  }
+};
+xhr.onerror = function (e) {
+  console.error('onerror', xhr.statusText);
+};
+xhr.send(null);
+console.log(2)
+```
+
+### URL
+
+#### Parse URL query string to object 
 
 ```js
 const token = new window.URLSearchParams(document.location.search).get('token')
