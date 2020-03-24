@@ -83,6 +83,35 @@ xhr.send(null);
 console.log(2)
 ```
 
+```js
+/**
+ * 
+ * @param url 
+ * @param {{ method: string; body: any; headers: any; }} options 
+ */
+function fetchSync(url, options = {}) {
+  const { method, body, headers } = options;
+  const req = new XMLHttpRequest();
+
+  req.open(method, url, false);
+  req.send(JSON.stringify(body));
+
+  Object.keys(headers).forEach(key => {
+    xhr.setRequestHeader(key, headers[key]);
+  });
+
+  if (xhr.readyState === XMLHttpRequest.DONE) {
+    if(xhr.getResponseHeader('content-type')==='application/json'){
+      var result = JSON.parse(xhr.responseText);	
+        //根据返回结果判断验证码是否正确
+    } else {
+        console.log(xhr.responseText);
+}
+}
+}
+
+```
+
 ### URL
 
 #### Parse URL query string to object 
