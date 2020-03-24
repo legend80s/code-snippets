@@ -90,6 +90,13 @@ _.compose = function() {
     return result;
   };
 };
+
+// test
+var greet    = function(name){ return "hi: " + name; };
+var exclaim  = function(statement){ return statement.toUpperCase() + "!"; };
+var welcome = _.compose(greet, exclaim);
+welcome('moe');
+=> 'hi: MOE!'
 ```
 
 1. async some and find。https://segmentfault.com/a/1190000014598785#item-6
