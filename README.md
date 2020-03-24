@@ -36,6 +36,45 @@ echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has sy
 
 ### General
 
+1. sync pipe
+
+```ts
+type IFunction = (...args: any[]) => any;
+
+function pipe(...fns: IFunction[]): any {
+  return (...args: any[]) => {
+    return fns.slice(1).reduce((acc, fn, idx) => {
+      return fn(acc);
+    }, fns[0](...args));
+  };
+}
+```
+
+```ts
+type IFunction = (...args: any[]) => any;
+
+function pipe(...fns: IFunction[]): any {
+  if (fns.length < 1) {
+    throw Error('pipe requires at least one argument')
+  }
+
+  fns.forEach((fn, i) => {
+    if (typeof fn !== 'function') {
+      throw Error(
+        'pipe requires each argument to be a function. ' +
+        `Argument #${i+1} is of type "${typeof fn}"`,
+      )
+    }
+  })
+
+  return (...args: any[]) => {
+    return fns.reduce((acc, fn, idx) => {
+      return idx === 0 ? fn.apply(null, acc) : fn(acc);
+    }, args);
+  };
+}
+```
+
 1. async some and find。https://segmentfault.com/a/1190000014598785#item-6
 
 ```typescript
