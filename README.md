@@ -38,6 +38,7 @@ echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has sy
 
 1. sync pipe
 
+method 1
 ```ts
 type IFunction = (...args: any[]) => any;
 
@@ -50,6 +51,7 @@ function pipe(...fns: IFunction[]): any {
 }
 ```
 
+method 2
 ```ts
 type IFunction = (...args: any[]) => any;
 
@@ -73,6 +75,21 @@ function pipe(...fns: IFunction[]): any {
     }, args);
   };
 }
+```
+
+method 2 - underscore way
+
+```ts
+_.compose = function() {
+  var args = arguments;
+  var start = args.length - 1;
+  return function() {
+    var i = start;
+    var result = args[start].apply(this, arguments);
+    while (i--) result = args[i].call(this, result);
+    return result;
+  };
+};
 ```
 
 1. async some and find。https://segmentfault.com/a/1190000014598785#item-6
