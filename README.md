@@ -38,6 +38,8 @@ echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has sy
 
 1. sync pipe
 
+![map filter reduce explained with emoji](https://i.redd.it/yf7rw3pjiapx.jpg)
+
 - pipe: reduce from left to right
 - compose: reduce from right to left. In math terms, composing the functions f(), g(), and h() produces f(g(h())).
 
