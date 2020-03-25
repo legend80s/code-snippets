@@ -38,6 +38,9 @@ echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has sy
 
 1. sync pipe
 
+- pipe: reduce from left to right
+- compose: reduce from right to left. In math terms, composing the functions f(), g(), and h() produces f(g(h())).
+
 method 1
 ```ts
 type IFunction = (...args: any[]) => any;
@@ -77,7 +80,7 @@ function pipe(...fns: IFunction[]): any {
 }
 ```
 
-method 2 - underscore way
+compose - underscore way
 
 ```ts
 _.compose = function() {
