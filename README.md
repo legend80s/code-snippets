@@ -468,4 +468,6 @@ export type IRequestPipeSync = (...args: Parameters<IRequestPipe>) => any;
 
 ```
 
+## Images
+
 
