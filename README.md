@@ -468,6 +468,19 @@ export type IRequestPipeSync = (...args: Parameters<IRequestPipe>) => any;
 
 ```
 
+## SQL
+
+```sql
+# KPI
+SELECT * FROM 
+(SELECT COUNT(*) as '总用户' FROM imock_user) as user,
+(SELECT COUNT(*) as 'X 用户' FROM imock_user WHERE user_id LIKE '2088%') as alipay_user,
+(SELECT COUNT(*) as 'Y 用户' FROM imock_user WHERE user_id NOT LIKE '2088%') as buc_user,
+(SELECT COUNT(*) as '项目' FROM imock_project) as project,
+(SELECT COUNT(*) as '接口' FROM imock_interface) as interface,
+(SELECT COUNT(*) as '数据' FROM imock_request) as request
+```
+
 ## Images
 
 
