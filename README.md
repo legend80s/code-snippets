@@ -481,6 +481,17 @@ SELECT * FROM
 (SELECT COUNT(*) as '数据' FROM imock_request) as request
 ```
 
+## VSCode
+
+### Settings
+
+1. If you want to enjoy seeing that vscode is detecting that the file is dirty showing the "dirty cycle" in the tab, set `files.autoSaveDelay` to any number above 1000ms.
+
+```json
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1001,
+```
+
 ## Images
 
 
