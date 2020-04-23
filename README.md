@@ -32,6 +32,19 @@ sed -i '' -e 's|"version": "[^"]\{1,\}"|"version": "'$npm_package_version_trimed
 echo '\x1b[32mVersion \x1b[1m'$npm_package_version_trimed'\x1b[0m\x1b[32m has synced to manifest.json.\x1b[0m'
 ```
 
+2. start dev server after web server is ready
+
+```sh
+export HOST="anymock.local.alipay.net"
+export PORT="7001"
+url="http://${HOST}:${PORT}"
+export WEB_URL="${url}"
+export SOCKET_SERVER="${url}"
+fkill :${PORT}
+
+echo \[$(date)\]: IMOCK-WEB npm run dev START && cd ../imock-web && tnpm run dev & sleep 20s && echo $(date) && echo '10 SECOND PASSED, START CURLING THE http://anymock.local.alipay.net:7001' && echo $(date) && curl http://anymock.local.alipay.net:7001 && echo '\n\n' && echo \[$(date)\]': IMOCK-WEB IS READY, READY TO START THE IMOCK SERVER' && cd ../imock && tnpm run dev:local
+```
+
 ## JS
 
 ### General
