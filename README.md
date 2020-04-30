@@ -49,6 +49,67 @@ echo \[$(date)\]: IMOCK-WEB npm run dev START && cd ../imock-web && tnpm run dev
 
 ### General
 
+1. Diff JSON
+
+https://runkit.com/embed/ynmsfkykt23p
+
+```js
+/**
+ * Diff source against changed find out the difference
+ * @example
+ * expected = { a: 1, b: 'str', c: [1, '2'], d: { d1: 1, d2: 2.1 } };
+ * actual = { a1, b: false, c: [1, {} ], d: { d1: '1', d2: 2, d3: '3' } };
+ * diff(expected, actual)
+ * // => {
+ *   a: 'removed',
+ *   a1: 'added',
+ *   b: 'type changed from string to boolean',
+ *   c: { 1: 'type changed from string to object' },
+ *   d: { d1: 'type changed from number to string', d3: 'added' }
+ * }
+ * 
+ * @example
+ * diff({ a: true }, { a: false })
+ * // => {}
+ * 
+ * @param expected 
+ * @param actual 
+ * @returns {IDifference}
+ */
+// function diff(expected, actual) {}
+
+var jsonSchema = require("json-schema")
+const toJsonSchema = require('to-json-schema');
+
+const expected = { a: 1, b: 'str', c: [1, '2'], d: { d1: 1, d2: 2.1 } };
+const actual = { a1: 'hello', b: false, c: [1, {} ], d: { d1: '1', d2: 2, d3: '3' } };
+ 
+// const mock = {
+//   name: 'David',
+//   born: '1990-04-05T15:09:56.704Z',
+//   rank: 1,
+//   luckyNumbers: [7, 77, 5]
+// }
+
+// const objToBeConverted = {
+//   a: 1,
+//   name: 1,
+//   born: '1990-04-05T15:09:56.704Z',
+//   luckyNumbers: [7, 77, 5]
+// };
+
+const rawSchema = toJsonSchema(expected, {
+  required: true,
+  objects: { additionalProperties: false },
+  arrays: {mode: 'tuple'},
+ });
+console.log('rawSchema', rawSchema)
+
+const schema = rawSchema;
+
+console.log(jsonSchema(actual, schema))
+```
+
 1. sync pipe
 
 ![map filter reduce explained with emoji](https://i.redd.it/yf7rw3pjiapx.jpg)
