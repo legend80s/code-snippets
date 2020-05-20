@@ -569,3 +569,31 @@ SELECT * FROM
 ## Images
 
 
+## CSS
+
+### Arrow
+
+```css
+.my-arrow {
+  .arrow(9px, red);
+}
+
+.arrow (@size; @color; @width: 1px; @direction: right) {
+  width: @size;
+  height: @size;
+  display: inline-block;
+  .arrow-shape(@color, @width, @direction);
+}
+
+.arrow-shape (@color; @width: 1px; @direction) when (@direction = right) {
+  border: @width solid @color;
+  border-width: @width @width 0 0;
+  transform: rotate(45deg);
+}
+```
+
+```html
+更多 <span class="my-arrow"></span>
+```
+
+demo: https://codepen.io/chuanzonglcz/pen/vYNveXx
