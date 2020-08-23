@@ -7,6 +7,12 @@
  * @example startBook(11, 23)
  */
 function startBook(hours, min = 0, sec = 0) {
+  const bookingBtns = document.querySelectorAll('.kuma-button.kuma-button-lorange');
+  
+  if (bookingBtns.length !== 1) { return console.error('页面内找不到会议室预订按钮，页面可能改版了') }
+
+  const bookingBtn = bookingBtn[0];
+  
   if (!hours) { return console.error('必须指定会议室开抢时间') }
 
   function getTargetDate() {
@@ -35,7 +41,9 @@ function startBook(hours, min = 0, sec = 0) {
 
   startBook.timer = setTimeout(() => {
     console.log('booked at:', new Date())
-    document.querySelector('.kuma-button.kuma-button-lorange').click()
+
+    bookingBtn.click()
+
     notifyMe('会议室于 ' + new Date().toString() +  ' 预订成功');
   }, bookTimeFromNow)
   
