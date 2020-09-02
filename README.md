@@ -303,6 +303,20 @@ from https://gist.github.com/pirate/9298155edda679510723.
 > Object {abc: "foo", def: "[asf]", double: "", flag: "", keyB: "hff92hfgg=", q: "test1=test2", xyz: "=5"}
 > ```
 
+### Beautiful Log
+
+```js
+function log() {
+  const t = 'onReady';
+  const o = "padding:2px 5px;background:#91d5ff;border:1px solid #91d5ff;";
+  const i = "padding:2px 5px;background:#e6f7ff;border:1px solid #91d5ff;";
+
+  console.log.apply(void 0, ["%c" + "global-state-core".toUpperCase() + "%c" + t, o, i].concat([].slice.call(arguments, 0)));
+}
+
+log('legend80s')
+```
+
 ## Vue
 
 ### Vue Minimum Reactivity Core
