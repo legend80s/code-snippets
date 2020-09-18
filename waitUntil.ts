@@ -13,7 +13,7 @@ async function waitUntil<T>(request: Promise<T>, threshold = 0): Promise<T> {
       const costs = end - start;
 
       if (costs - threshold >= 0) {
-        return resp;
+        return resolve(resp);
       }
 
       setTimeout(() => {
@@ -25,13 +25,36 @@ async function waitUntil<T>(request: Promise<T>, threshold = 0): Promise<T> {
   });
 }
 
-console.time('It will reject after 500 ms')
-try { await(waitUntil(rejectAfter(500), 1000)); }
-finally {
-  console.timeEnd('It must resolve after 500 ms')
+export function sleep(timeout: number, val?: any) {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(val), timeout);
+  })
 }
 
-console.time('It must resolve after 1000 ms')
-await(resolveAfter(500), 1000));
-console.timeEnd('It must resolve after 1000 ms')
+function resolveAfter(ms) {
+  return sleep(ms)
+}
+
+async function rejectAfter(ms) {
+  await sleep(ms)
+
+  throw new Error("rejected after " + ms + 'ms');
+}
+
+
+console.time('It will reject after 500 ms')
+
+try {
+  await(waitUntil(rejectAfter(500), 1000));
+} finally {
+  console.timeEnd('It will reject after 500 ms')
+}
+
+console.time('It must resolve after 1000 ms even if time costs less than 1000')
+await waitUntil(resolveAfter(500), 1000);
+console.timeEnd('It must resolve after 1000 ms even if time costs less than 1000')
+
+console.time('It must resolve after 1500 ms')
+await waitUntil(resolveAfter(1500), 1000);
+console.timeEnd('It must resolve after 1500 ms')
 
