@@ -4,6 +4,19 @@ Overused and valuable code snippets
 
 ## Shell
 
+1. shell 文件内无法使用 nvm use 8
+
+```sh
+# nvm
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+# nvm --version
+unset npm_config_prefix
+
+nvm use 8 && npm run dev:herb
+```
+
 1. replace `1.1.5-alpha.0` to `1.1.5` in a file
 
 Use case: Copy and normalize version in package.json to crx's manifest.json.
