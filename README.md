@@ -624,3 +624,20 @@ SELECT * FROM
 ```
 
 demo: https://codepen.io/chuanzonglcz/pen/vYNveXx
+
+## TS TypeScript
+
+### How to extend window
+
+Add `Tracert` property to window
+
+```
+declare global {
+  interface Window {
+    Tracert: {
+      click: (spmId: string, params?: object) => void;
+      expo: (spmId: string, offset?: number, params?: object) => void;
+    }
+  }
+}
+```
