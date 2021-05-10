@@ -193,7 +193,7 @@ function cur_repo() {
 }
 
 function open_repo() {
-  repo=$(curr_repo)
+  repo=$(cur_repo)
 
   echo $repo;
 
