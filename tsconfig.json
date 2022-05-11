@@ -1,0 +1,15 @@
+{
+  "exclude": [
+    ".git",
+    ".sherry",
+    "dist",
+    "zBakeryData",
+    "node_modules",
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "target": "esnext"
+  }
+}
