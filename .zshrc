@@ -202,6 +202,24 @@ function open_repo() {
   open $repo
 }
 
+dict() {
+  rawKeyword='"'"$@"'"'
+
+  # echo "search word $rawKeyword"
+
+  keyword=$(node -p "encodeURIComponent($rawKeyword)")
+
+  open "http://dict.youdao.com/w/$keyword"
+}
+
+open-npm() {
+  rawName=$(jq .name package.json)
+
+  name=$(node -p "$rawName.replace(/^\"$/g, '')") 
+
+  open "https://www.npmjs.com/package/$name"
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
