@@ -1,0 +1,271 @@
+ZSH_DISABLE_COMPFIX="true"
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/legend80s/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="cloud"
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#candy
+# https://github.com/unixorn/awesome-zsh-plugins#themes
+# ZSH_THEME="gallois"
+# ZSH_THEME="amuse"
+# ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias 。。=".."
+
+alias p="pnpm"
+
+alias zshrc="code ~/.zshrc"
+alias cz="code ~/.zshrc"
+alias sz="source ~/.zshrc"
+alias hosts="code /private/etc/hosts"
+
+alias alipay="~/workspace/alipay"
+alias workspace="~/workspace"
+alias yue="~/workspace/alipay/mini-balance"
+alias mb="~/workspace/alipay/mini-balance"
+alias mini-balance="~/workspace/alipay/mini-balance"
+alias minirecharge="~/workspace/alipay/MiniRecharge"
+alias cz="~/workspace/alipay/cz"
+alias legend80s="~/workspace/legend80s"
+alias infra="~/workspace/alipay/infra"
+alias ccr="~/workspace/alipay/credit-card-payment"
+alias xyk="~/workspace/alipay/credit-card-payment"
+alias 信用卡="~/workspace/alipay/credit-card-payment"
+alias wxf="~/workspace/alipay/tinyapp_bank_transfer"
+
+alias dtb-offline="~/workspace/alipay/dtb-offline-2"
+alias dtb="~/workspace/alipay/dtb-offline-2"
+alias oc="~/workspace/alipay/digital-bank-oc"
+alias gzm="~/workspace/alipay/gzmsdtb-staffmng"
+
+alias 无限付="~/workspace/alipay/tinyapp_bank_transfer"
+alias limo="~/workspace/alipay/infra/limo-core"
+alias limo-core="~/workspace/alipay/infra/limo-core"
+
+alias temp="/tmp"
+alias tmp="/tmp"
+
+alias xtest="npm run test"
+alias jest="npm run jest"
+alias t="npm run test"
+alias dev="npm run dev"
+alias d="npm run dev"
+alias start="npm run start"
+alias s="npm run start"
+alias ci="npm run ci"
+alias i="tnpm i"
+alias install="tnpm i"
+
+alias mock="npm run mock"
+alias dev2="npm run dev2"
+alias watch="npm run watch"
+alias dev:withdraw="npm run dev:withdraw"
+alias build="npm run build"
+alias b="npm run build"
+alias lint="npm run lint"
+alias lintfix="npm run lint:fix"
+alias proxy="npm run proxy"
+alias hss="hpm sim start"
+alias GD="gd"
+alias GST="gst"
+alias gs="gst"
+
+alias gmm="gcm && gl && gco - && git merge origin/master"
+
+dict() {
+  rawKeyword='"'"$@"'"'
+
+  # echo "search word $rawKeyword"
+
+  keyword=$(node -p "encodeURIComponent($rawKeyword)")
+
+  open "http://dict.youdao.com/w/$keyword"
+}
+
+open-npm() {
+  # https://fedingo.com/how-to-check-if-input-argument-exists-in-shell-script/
+  if [ ! -z "$1" ] 
+  then
+    name=$1
+  else
+    rawName=$(jq .name package.json)
+
+    name=$(node -p "$rawName.replace(/^\"$/g, '')") 
+  fi
+
+  if [[ $name = @ali* ]] 
+  then
+    echo "tnpm"
+    open "https://web.npm.alibaba-inc.com/package/$name"
+
+    return
+  fi
+
+  open "https://www.npmjs.com/package/$name"
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# cdi begin
+# /Users/legend80s/Downloads/cdi-v1
+cdipath='/Users/legend80s/Downloads/cdi-v5'
+
+cdi() {
+  target=$($cdipath "$@")
+  
+  # TODO: 绝对路径huo . - 开头直接 cd xxx 否则时间太长
+  if [[ $target == *"no such dirname"* ]]; then
+    # fallback to original
+    cd $@
+  else
+    echo $target
+    cd $target
+  fi
+}
+
+cdi-echo() {
+  target=$($cdipath "$@")
+
+  echo $target
+}
+
+# Intelligent `code` command `codi`
+codi() {
+  target=$($cdipath "$@")
+
+  # 绝对路径直接 code xxx 否则时间太长
+  if [[ $target == *"no such dirname"* ]]; then
+    # fallback to original
+    code $@
+    cd $@
+  else
+    echo $target
+    cd $target
+    code $target
+    # code $(cdi-echo $1)
+  fi
+}
+
+alias cdi-stat="$cdipath stat"
+alias cdi-stat-clear="$cdipath stat --clear"
+# cdi end
+
+nvm use 16 # default
+
+# java begin
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home"
+export PATH="$JAVA_HOME/bin:$PATH"
+echo
+java -version | grep version
+# java end
+
+# https://github.com/starship/starship
+eval "$(starship init zsh)"
+
+function set_win_title(){
+    echo -ne "\033]0; $(basename "$PWD") \007"
+}
+starship_precmd_user_func="set_win_title"
