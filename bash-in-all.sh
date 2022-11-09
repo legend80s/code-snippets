@@ -21,3 +21,8 @@ do
 done
 
 echo "Done ✅"
+
+
+# file size
+# du -sh dir "du - tells the disk use not the file size." https://superuser.com/questions/22460/how-do-i-get-the-size-of-a-linux-or-mac-os-x-directory-from-the-command-line
+find directory -type f -print0 | xargs -0 stat -f'%z' | awk '{b+=$1} END {print b}'
