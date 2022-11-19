@@ -1,7 +1,7 @@
 /**
  * Transform HTML `table` element to JS Object.
  * @param {HTMLTableElement} table
- * @returns { caption: string; rows: Array<{ [key: string]: string }>
+ * @returns {{ caption: string; rows: Array<{ [key: string]: string }>; }}
  */
 function table2JSObject(table) {
   const caption = table.caption ? table.caption.textContent.trim() : '';
