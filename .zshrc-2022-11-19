@@ -79,6 +79,7 @@ export ZSH="/Users/legend80s/.oh-my-zsh"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  git-plus
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
@@ -156,6 +157,7 @@ alias s="npm run start"
 alias ci="npm run ci"
 alias i="tnpm i"
 alias install="tnpm i"
+alias init="npm run init"
 
 alias mock="npm run mock"
 alias dev2="npm run dev2"
@@ -164,14 +166,77 @@ alias dev:withdraw="npm run dev:withdraw"
 alias build="npm run build"
 alias b="npm run build"
 alias lint="npm run lint"
+alias stylelint="npm run stylelint"
 alias lintfix="npm run lint:fix"
 alias proxy="npm run proxy"
 alias hss="hpm sim start"
-alias GD="gd"
-alias GST="gst"
-alias gs="gst"
 
-alias gmm="gcm && gl && gco - && git merge origin/master"
+alias opennpm="open-npm"
+
+alias c="code ."
+alias cmb='code ~/workspace/alipay/mini-balance'
+alias cmr='code ~/workspace/alipay/MiniRecharge'
+
+# alias coverage="npm run coverage"
+# alias cov="npm run cov"
+
+GREEN='\e[32m'
+YELLOW='\e[33m'
+RESET='\e[0m'
+
+function coverage() {
+  npm run coverage
+
+  if [[ $? != 0 ]] 
+  then
+    local out=$((npm run coverage) 2>&1)
+    
+    # https://linuxize.com/post/how-to-check-if-string-contains-substring-in-bash/
+    if [[ $out == *'Missing script'* ]] 
+    then
+      echo '\e[33m\nMissing script `cov`.\e[0m'
+      
+      # https://effective-shell.com/part-4-shell-scripting/mastering-conditional-logic#case-statements
+      read -p $GREEN'Do you wish to `npm run cov`? Yes or no: '$RESET response
+
+      case $response in
+        y | Y | yes | Yes) npm run cov;;
+      esac
+    fi
+  fi
+}
+
+function cov() {
+  npm run cov
+
+  if [[ $? != 0 ]]
+  then
+    local out=$((npm run cov) 2>&1)
+
+    # https://linuxize.com/post/how-to-check-if-string-contains-substring-in-bash/
+    if [[ $out == *'Missing script'* ]]
+    then
+      # echo $out
+      local script=coverage
+
+      ## match cov1 from 'run the "cov1" package script'
+      if [[ $out =~ \#[[:space:]]run[[:space:]]the[[:space:]]\"([^\"]+)\"[[:space:]]package[[:space:]]script ]]
+      then
+        script=${BASH_REMATCH[1]}
+      fi
+
+      echo -e $YELLOW'\nMissing script "cov"'$RESET
+
+      # https://effective-shell.com/part-4-shell-scripting/mastering-conditional-logic#case-statements
+      echo -e $GREEN"Do you wish to \"npm run $script\"?"$RESET
+      read -p "Yes or no: " response
+
+      case $response in
+        y | Y | yes | Yes) npm run $script;;
+      esac
+    fi
+  fi
+}
 
 dict() {
   rawKeyword='"'"$@"'"'
@@ -194,7 +259,7 @@ open-npm() {
     name=$(node -p "$rawName.replace(/^\"$/g, '')") 
   fi
 
-  if [[ $name = @ali* ]] 
+  if [[ $name = @ali* ]]
   then
     echo "tnpm"
     open "https://web.npm.alibaba-inc.com/package/$name"
@@ -203,6 +268,34 @@ open-npm() {
   fi
 
   open "https://www.npmjs.com/package/$name"
+}
+
+view-package-json() {
+  # https://linuxize.com/post/bash-functions/#passing-arguments-to-bash-functions
+  # The $* and $@ variables hold all positional parameters/arguments passed to the function.
+  # - When not double-quoted, $* and $@ are the same.
+  less-package-json $*
+}
+
+less-package-json() {
+  # https://fedingo.com/how-to-check-if-input-argument-exists-in-shell-script/
+  if [ ! -z "$1" ] 
+  then
+    name=$1
+    packageJsonPath="./node_modules/$name/package.json"
+  else
+    packageJsonPath="./package.json"
+  fi
+
+  if [ ! -z "$2" ] 
+  then
+    key=$2
+    jq ".$key" $packageJsonPath
+
+    return
+  fi
+
+  less $packageJsonPath
 }
 
 export NVM_DIR="$HOME/.nvm"
@@ -269,3 +362,8 @@ function set_win_title(){
     echo -ne "\033]0; $(basename "$PWD") \007"
 }
 starship_precmd_user_func="set_win_title"
+
+# pnpm
+export PNPM_HOME="/Users/legend80s/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
