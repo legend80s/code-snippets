@@ -4,7 +4,7 @@
  * @returns { caption: string; rows: Array<{ [key: string]: string }>
  */
 function table2JSObject(table) {
-  const caption = table.caption.textContent.trim();
+  const caption = table.caption ? table.caption.textContent.trim() : '';
   const titles = [...table.querySelectorAll('th')].map(th => {
     const innerHTML = th.innerHTML;
     
