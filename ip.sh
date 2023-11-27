@@ -1,3 +1,5 @@
+ipconfig getifaddr en0
+
 #!/bin/bash
 set -e
 
