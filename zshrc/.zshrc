@@ -659,6 +659,18 @@ function set_win_title(){
 }
 starship_precmd_user_func="set_win_title"
 
+# 以下内容放到 ~/.config/starship.toml
+```
+# [nodejs]
+symbol = "🦄 "
+# symbol = "nodejs 🦄 "
+# symbol = "nodejs 🦄 🚀 "
+
+[git_branch]
+symbol = "🌱 "
+# symbol = "🌱 ☘️ 🌿 🌾 "
+```
+
 # pnpm
 export PNPM_HOME="/Users/legend80s/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
