@@ -148,7 +148,11 @@ gclone() {
 alias repo-url="git remote get-url origin | awk '{ gsub(/^git@|\.git$/, \"\"); printf \$1 }' | awk '{ gsub(/:/, \"/\"); printf \$1 }'"
 alias open-repo="repo-url | xargs start"
 alias open="start"
-alias open-npm="start 'https://www.npmjs.com/package/'$(grep name package.json | awk -F '"' '{ print $4 }')"
+
+function open_npm() {
+  start 'https://www.npmjs.com/package/'$(grep name package.json | awk -F '"' '{ print $4 }')
+}
+alias open-npm="open_npm"
 
 # extract git repository name from string "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 # input https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -219,7 +223,7 @@ change_node_version_per_project() {
 
     if [[ -f "$nvmrc_path" ]]; then
         local node_version=$(grep -oP '\d+(\.\d+)?(\.\d+)?' .nvmrc | head -n1)
-        
+
         echo '---------------------------------------'
         echo "node_version in .nvmrc is $node_version"
         echo '---------------------------------------'
