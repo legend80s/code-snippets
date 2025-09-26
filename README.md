@@ -22,7 +22,6 @@ nvm use 8 && npm run dev:herb
 Use case: Copy and normalize version in package.json to crx's manifest.json.
 
 package.json
-
 ```json
 {
   "version": "1.1.6-alpha.1"
