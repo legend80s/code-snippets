@@ -239,6 +239,8 @@ change_node_version_per_project() {
 use_from_pkg_json() {
     if [[ -f "./package.json" ]]; then
       local node_version=$(grep -A 2 engines package.json | grep -oP '[0-9]+' | head -n1);
+      # "node": ">=18
+      local hasLargerThanOrEqualSign=$(grep -A 2 engines package.json | grep -oP '"node": ">=?[0-9]+' | head -n1);
 
       echo '---------------------------------------------'
       echo "engines.node in package.json is $node_version";
@@ -250,7 +252,12 @@ use_from_pkg_json() {
       if [ -z "$node_version" ]; then
           echo "No node version specified in package.json."
       else
-          nvm use "$node_version"
+          # if hasLargerThanOrEqualSign not empty then use `nvm use latest`
+          if [ -n "$hasLargerThanOrEqualSign" ]; then
+              nvm use latest
+          else
+              nvm use "$node_version"
+          fi
       fi
   fi
 }
