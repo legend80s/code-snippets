@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 // @ts-check
-// modified https://www.npmjs.com/package/tsc-files
+// Modified https://www.npmjs.com/package/tsc-files
 // Fix: pnpm not work due to tsc bin file path not resolve correctly
 // Feature: filter and show only errors about the files
+// Perf: use tsgo instead of tsc for better performance (4.3x = 5.66s ↓ 1.3s)
 
+// import { $ } from 'bun';
 import { execSync } from 'node:child_process';
-import { readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const randomChars = () => {
@@ -18,11 +20,13 @@ const resolveFromRoot = (...paths) => {
   return join(process.cwd(), ...paths);
 };
 
-const args = process.argv.slice(2);
-const isVerbose = args.includes('--verbose');
+let args = process.argv.slice(2);
+
+const isVerbose = args.includes('--my-verbose');
+// Remove none tsc args
+args = args.filter(arg => !['--my-verbose'].includes(arg));
 
 const argsProjectIndex = args.findIndex(arg => ['-p', '--project'].includes(arg));
-
 const argsProjectValue = argsProjectIndex !== -1 ? args[argsProjectIndex + 1] : undefined;
 
 const files = args.filter(file => /\.(ts|tsx)$/.test(file));
@@ -90,44 +94,72 @@ main(tempTsConfigFilename, files);
  * @param {string[]} tsFilesToCheck
  */
 function main(tempTsConfigFilename, tsFilesToCheck) {
-  const cmd = `npx tsc -p ${tempTsConfigFilename} --noEmit`;
-  // console.log('Running command:', cmd)
+  // const args = `-v`;
+  let args = [`-p`, tempTsConfigFilename, ...remainingArgsToForward];
+  // @ts-expect-error
+  args = args.join(' ');
+  const typescriptCompiler = 'tsgo';
+  const absolutePath = resolveFromRoot(`node_modules/.bin/${typescriptCompiler}`);
+  const cmd = `${absolutePath} ${args}`;
+
+  if (isVerbose) {
+    console.log(`Running command: "${cmd}"`);
+  }
+
   try {
     const stdout = execSync(cmd);
     console.log('✅ Type-checking success for ALL files', stdout?.toString());
-  } catch (error) {
+  } catch (execError) {
     /** @type {string} */
     // @ts-expect-error
-    const stdout = error.stdout.toString();
+    const stdout = execError.stdout.toString().trim();
+    /** @type {string} */
+    // @ts-expect-error
+    const stderr = execError.stderr.toString().trim();
     /** @type {number} */
     // @ts-expect-error
-    const status = error.status;
+    const exitCode = execError.status;
+    // if absolutePath not exists
+    if (!existsSync(absolutePath)) {
+      errorLog('Type-checking failed:', stderr);
+      errorLog(`Please check if "${typescriptCompiler}" is installed.`);
+      process.exitCode = exitCode;
+      return;
+    }
 
-    const lines = stdout.split('\n');
+    const fullOutput = `${stdout}\n${stderr}`;
+    const lines = fullOutput.split('\n');
     const filteredLines = lines.filter(line => tsFilesToCheck.some(file => line.includes(file)));
 
     // 其他文件有错误也会导致退出码非0，这里只关注指定文件的错误，故认为是成功
     if (filteredLines.length === 0) {
       console.log(
-        '✅ Type-checking success for the files (others files errors ignored):',
+        '✅ Type-checking passed for the specified files. (Errors in other files were skipped.):',
         tsFilesToCheck,
       );
 
       if (isVerbose) {
         console.error();
         console.error('But other files have errors:');
-        console.error(stdout);
-        process.exitCode = status;
+        console.error(fullOutput);
+        process.exitCode = exitCode;
       }
 
       process.exitCode = 0;
       return;
     }
 
-    console.error('❌ Type-checking failed with status:', status, '\n');
+    console.error('❌ Type-checking failed with exit code:', exitCode, '\n');
     console.error(filteredLines.join('\n'));
 
-    process.exitCode = status;
+    process.exitCode = exitCode;
     return;
   }
+}
+
+/**
+ * @param {...any} args
+ */
+function errorLog(...args) {
+  console.error('[tsc-files] ❌', ...args);
 }
