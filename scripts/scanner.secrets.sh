@@ -12,8 +12,8 @@ RESET='\033[0m'
 
 verbose=false
 
-info() { [ "$verbose" = true ] && echo -e "${GREEN}$1${RESET}"; }
-success() { echo -e "${GREEN}$1${RESET}"; }
+info() { [ "$verbose" = true ] && echo -e "${GREEN}[SCANNER_SECRETS] $1${RESET}"; }
+success() { echo -e "${GREEN}[SCANNER_SECRETS] $1${RESET}"; }
 error() { echo -e "${BOLD}${RED}$1${RESET}"; }
 
 info "🔍 正在执行敏感信息扫描 (Shell)..."

@@ -9,8 +9,8 @@ RESET='\033[0m'
 
 verbose=false
 
-info() { [ "$verbose" = true ] && echo -e "${GREEN}[MOCK_DATA_SCANNER] $1${RESET}"; }
-success() { echo -e "${GREEN}[MOCK_DATA_SCANNER] $1${RESET}"; }
+info() { [ "$verbose" = true ] && echo -e "${GREEN}[SCANNER_MOCK_DATA] $1${RESET}"; }
+success() { echo -e "${GREEN}[SCANNER_MOCK_DATA] $1${RESET}"; }
 error() { echo -e "${BOLD}${RED}$1${RESET}"; }
 
 
