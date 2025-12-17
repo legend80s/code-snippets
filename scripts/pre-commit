@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+node ./scripts/scanner-main.mjs
+
+# TIMEFORMAT='⏱️ 扫描总耗时: %R秒' # 0.460秒
+# time node ./scripts/scanner-main.mjs
