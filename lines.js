@@ -3,7 +3,7 @@
  *
  * @param  {string} longText 被分割的字符串
  * @param  {number} lengthPerLine 每行长度
- * @param  {string} [lineBreaker=\n] 分行符，比如 '\n', '<br />'
+ * @param  {string} [lineBreaker] 分行符，比如 '\n', '<br />'。默认值 \n
 
  * @return {string} 分行符分割的字符串
  */
