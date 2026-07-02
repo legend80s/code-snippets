@@ -139,14 +139,14 @@ gclone() {
   git clone "$1" && cd $(extract_repo_name "$1") && code .
 }
 
-# Open current repository url in browser.
-# replace
-# https://git.corp.com/project/path.git
-# to
-# https://git.corp.com/project/path
+# Open current repository url in browser. 支持一下几种格式：
+# - https://git.foo.com/foo2/bar/baz.git
+# - git@github.com:legend80s/stoc.git
 # and open it in browser using `start` in Windows
-alias repo-url="git remote get-url origin | awk '{ gsub(/^git@|\.git$/, \"\"); printf \$1 }' | awk '{ gsub(/:/, \"/\"); printf \$1 }'"
+alias repo-url="git remote get-url origin | awk '{ gsub(/:/, \"/\"); printf \$1 }' | awk '{ gsub(/^git@/, \"https://\"); printf \$1 }' | awk '{ gsub(/^https\/\/\//, \"https://\"); printf \$1 }'"
+alias git-repo="repo-url"
 alias open-repo="repo-url | xargs start"
+alias openrepo=open-repo
 alias open="start"
 
 function open_npm() {
